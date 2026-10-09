@@ -1,0 +1,1286 @@
+{
+    "version":  "5",
+    "dialect":  "mysql",
+    "id":  "159c47d7-cf73-480f-9fc2-897ba5b93d33",
+    "prevId":  "e38bc6aa-94ba-494a-a6a8-079929ea4413",
+    "tables":  {
+                   "assets":  {
+                                  "name":  "assets",
+                                  "columns":  {
+                                                  "id":  {
+                                                             "name":  "id",
+                                                             "type":  "int",
+                                                             "primaryKey":  false,
+                                                             "notNull":  true,
+                                                             "autoincrement":  true
+                                                         },
+                                                  "workspaceId":  {
+                                                                      "name":  "workspaceId",
+                                                                      "type":  "int",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false
+                                                                  },
+                                                  "storageKey":  {
+                                                                     "name":  "storageKey",
+                                                                     "type":  "varchar(512)",
+                                                                     "primaryKey":  false,
+                                                                     "notNull":  true,
+                                                                     "autoincrement":  false
+                                                                 },
+                                                  "url":  {
+                                                              "name":  "url",
+                                                              "type":  "varchar(1024)",
+                                                              "primaryKey":  false,
+                                                              "notNull":  true,
+                                                              "autoincrement":  false
+                                                          },
+                                                  "filename":  {
+                                                                   "name":  "filename",
+                                                                   "type":  "varchar(255)",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false
+                                                               },
+                                                  "mimeType":  {
+                                                                   "name":  "mimeType",
+                                                                   "type":  "varchar(128)",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false
+                                                               },
+                                                  "sizeBytes":  {
+                                                                    "name":  "sizeBytes",
+                                                                    "type":  "int",
+                                                                    "primaryKey":  false,
+                                                                    "notNull":  true,
+                                                                    "autoincrement":  false
+                                                                },
+                                                  "width":  {
+                                                                "name":  "width",
+                                                                "type":  "int",
+                                                                "primaryKey":  false,
+                                                                "notNull":  false,
+                                                                "autoincrement":  false
+                                                            },
+                                                  "height":  {
+                                                                 "name":  "height",
+                                                                 "type":  "int",
+                                                                 "primaryKey":  false,
+                                                                 "notNull":  false,
+                                                                 "autoincrement":  false
+                                                             },
+                                                  "uploadedBy":  {
+                                                                     "name":  "uploadedBy",
+                                                                     "type":  "int",
+                                                                     "primaryKey":  false,
+                                                                     "notNull":  true,
+                                                                     "autoincrement":  false
+                                                                 },
+                                                  "createdAt":  {
+                                                                    "name":  "createdAt",
+                                                                    "type":  "timestamp",
+                                                                    "primaryKey":  false,
+                                                                    "notNull":  true,
+                                                                    "autoincrement":  false,
+                                                                    "default":  "(now())"
+                                                                }
+                                              },
+                                  "indexes":  {
+                                                  "asset_storage_key_unique":  {
+                                                                                   "name":  "asset_storage_key_unique",
+                                                                                   "columns":  [
+                                                                                                   "storageKey"
+                                                                                               ],
+                                                                                   "isUnique":  true
+                                                                               },
+                                                  "asset_workspace_created_idx":  {
+                                                                                      "name":  "asset_workspace_created_idx",
+                                                                                      "columns":  [
+                                                                                                      "workspaceId",
+                                                                                                      "createdAt"
+                                                                                                  ],
+                                                                                      "isUnique":  false
+                                                                                  }
+                                              },
+                                  "foreignKeys":  {
+                                                      "assets_workspaceId_workspaces_id_fk":  {
+                                                                                                  "name":  "assets_workspaceId_workspaces_id_fk",
+                                                                                                  "tableFrom":  "assets",
+                                                                                                  "tableTo":  "workspaces",
+                                                                                                  "columnsFrom":  [
+                                                                                                                      "workspaceId"
+                                                                                                                  ],
+                                                                                                  "columnsTo":  [
+                                                                                                                    "id"
+                                                                                                                ],
+                                                                                                  "onDelete":  "cascade",
+                                                                                                  "onUpdate":  "no action"
+                                                                                              },
+                                                      "assets_uploadedBy_users_id_fk":  {
+                                                                                            "name":  "assets_uploadedBy_users_id_fk",
+                                                                                            "tableFrom":  "assets",
+                                                                                            "tableTo":  "users",
+                                                                                            "columnsFrom":  [
+                                                                                                                "uploadedBy"
+                                                                                                            ],
+                                                                                            "columnsTo":  [
+                                                                                                              "id"
+                                                                                                          ],
+                                                                                            "onDelete":  "cascade",
+                                                                                            "onUpdate":  "no action"
+                                                                                        }
+                                                  },
+                                  "compositePrimaryKeys":  {
+                                                               "assets_id":  {
+                                                                                 "name":  "assets_id",
+                                                                                 "columns":  [
+                                                                                                 "id"
+                                                                                             ]
+                                                                             }
+                                                           },
+                                  "uniqueConstraints":  {
+
+                                                        },
+                                  "checkConstraint":  {
+
+                                                      }
+                              },
+                   "document_versions":  {
+                                             "name":  "document_versions",
+                                             "columns":  {
+                                                             "id":  {
+                                                                        "name":  "id",
+                                                                        "type":  "int",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  true
+                                                                    },
+                                                             "pageId":  {
+                                                                            "name":  "pageId",
+                                                                            "type":  "int",
+                                                                            "primaryKey":  false,
+                                                                            "notNull":  true,
+                                                                            "autoincrement":  false
+                                                                        },
+                                                             "versionNumber":  {
+                                                                                   "name":  "versionNumber",
+                                                                                   "type":  "int",
+                                                                                   "primaryKey":  false,
+                                                                                   "notNull":  true,
+                                                                                   "autoincrement":  false
+                                                                               },
+                                                             "state":  {
+                                                                           "name":  "state",
+                                                                           "type":  "enum(\u0027draft\u0027,\u0027published\u0027,\u0027archived\u0027)",
+                                                                           "primaryKey":  false,
+                                                                           "notNull":  true,
+                                                                           "autoincrement":  false,
+                                                                           "default":  "\u0027draft\u0027"
+                                                                       },
+                                                             "schema":  {
+                                                                            "name":  "schema",
+                                                                            "type":  "json",
+                                                                            "primaryKey":  false,
+                                                                            "notNull":  true,
+                                                                            "autoincrement":  false
+                                                                        },
+                                                             "html":  {
+                                                                          "name":  "html",
+                                                                          "type":  "text",
+                                                                          "primaryKey":  false,
+                                                                          "notNull":  false,
+                                                                          "autoincrement":  false
+                                                                      },
+                                                             "css":  {
+                                                                         "name":  "css",
+                                                                         "type":  "text",
+                                                                         "primaryKey":  false,
+                                                                         "notNull":  false,
+                                                                         "autoincrement":  false
+                                                                     },
+                                                             "createdBy":  {
+                                                                               "name":  "createdBy",
+                                                                               "type":  "int",
+                                                                               "primaryKey":  false,
+                                                                               "notNull":  true,
+                                                                               "autoincrement":  false
+                                                                           },
+                                                             "createdAt":  {
+                                                                               "name":  "createdAt",
+                                                                               "type":  "timestamp",
+                                                                               "primaryKey":  false,
+                                                                               "notNull":  true,
+                                                                               "autoincrement":  false,
+                                                                               "default":  "(now())"
+                                                                           },
+                                                             "publishedAt":  {
+                                                                                 "name":  "publishedAt",
+                                                                                 "type":  "timestamp",
+                                                                                 "primaryKey":  false,
+                                                                                 "notNull":  false,
+                                                                                 "autoincrement":  false
+                                                                             }
+                                                         },
+                                             "indexes":  {
+                                                             "document_page_version_unique":  {
+                                                                                                  "name":  "document_page_version_unique",
+                                                                                                  "columns":  [
+                                                                                                                  "pageId",
+                                                                                                                  "versionNumber"
+                                                                                                              ],
+                                                                                                  "isUnique":  true
+                                                                                              },
+                                                             "document_page_state_idx":  {
+                                                                                             "name":  "document_page_state_idx",
+                                                                                             "columns":  [
+                                                                                                             "pageId",
+                                                                                                             "state"
+                                                                                                         ],
+                                                                                             "isUnique":  false
+                                                                                         }
+                                                         },
+                                             "foreignKeys":  {
+                                                                 "document_versions_pageId_pages_id_fk":  {
+                                                                                                              "name":  "document_versions_pageId_pages_id_fk",
+                                                                                                              "tableFrom":  "document_versions",
+                                                                                                              "tableTo":  "pages",
+                                                                                                              "columnsFrom":  [
+                                                                                                                                  "pageId"
+                                                                                                                              ],
+                                                                                                              "columnsTo":  [
+                                                                                                                                "id"
+                                                                                                                            ],
+                                                                                                              "onDelete":  "cascade",
+                                                                                                              "onUpdate":  "no action"
+                                                                                                          },
+                                                                 "document_versions_createdBy_users_id_fk":  {
+                                                                                                                 "name":  "document_versions_createdBy_users_id_fk",
+                                                                                                                 "tableFrom":  "document_versions",
+                                                                                                                 "tableTo":  "users",
+                                                                                                                 "columnsFrom":  [
+                                                                                                                                     "createdBy"
+                                                                                                                                 ],
+                                                                                                                 "columnsTo":  [
+                                                                                                                                   "id"
+                                                                                                                               ],
+                                                                                                                 "onDelete":  "cascade",
+                                                                                                                 "onUpdate":  "no action"
+                                                                                                             }
+                                                             },
+                                             "compositePrimaryKeys":  {
+                                                                          "document_versions_id":  {
+                                                                                                       "name":  "document_versions_id",
+                                                                                                       "columns":  [
+                                                                                                                       "id"
+                                                                                                                   ]
+                                                                                                   }
+                                                                      },
+                                             "uniqueConstraints":  {
+
+                                                                   },
+                                             "checkConstraint":  {
+
+                                                                 }
+                                         },
+                   "form_submissions":  {
+                                            "name":  "form_submissions",
+                                            "columns":  {
+                                                            "id":  {
+                                                                       "name":  "id",
+                                                                       "type":  "int",
+                                                                       "primaryKey":  false,
+                                                                       "notNull":  true,
+                                                                       "autoincrement":  true
+                                                                   },
+                                                            "projectId":  {
+                                                                              "name":  "projectId",
+                                                                              "type":  "int",
+                                                                              "primaryKey":  false,
+                                                                              "notNull":  true,
+                                                                              "autoincrement":  false
+                                                                          },
+                                                            "pageId":  {
+                                                                           "name":  "pageId",
+                                                                           "type":  "int",
+                                                                           "primaryKey":  false,
+                                                                           "notNull":  true,
+                                                                           "autoincrement":  false
+                                                                       },
+                                                            "formId":  {
+                                                                           "name":  "formId",
+                                                                           "type":  "varchar(160)",
+                                                                           "primaryKey":  false,
+                                                                           "notNull":  true,
+                                                                           "autoincrement":  false,
+                                                                           "default":  "\u0027contact\u0027"
+                                                                       },
+                                                            "name":  {
+                                                                         "name":  "name",
+                                                                         "type":  "varchar(180)",
+                                                                         "primaryKey":  false,
+                                                                         "notNull":  false,
+                                                                         "autoincrement":  false
+                                                                     },
+                                                            "email":  {
+                                                                          "name":  "email",
+                                                                          "type":  "varchar(320)",
+                                                                          "primaryKey":  false,
+                                                                          "notNull":  false,
+                                                                          "autoincrement":  false
+                                                                      },
+                                                            "phone":  {
+                                                                          "name":  "phone",
+                                                                          "type":  "varchar(80)",
+                                                                          "primaryKey":  false,
+                                                                          "notNull":  false,
+                                                                          "autoincrement":  false
+                                                                      },
+                                                            "message":  {
+                                                                            "name":  "message",
+                                                                            "type":  "text",
+                                                                            "primaryKey":  false,
+                                                                            "notNull":  false,
+                                                                            "autoincrement":  false
+                                                                        },
+                                                            "payload":  {
+                                                                            "name":  "payload",
+                                                                            "type":  "json",
+                                                                            "primaryKey":  false,
+                                                                            "notNull":  true,
+                                                                            "autoincrement":  false
+                                                                        },
+                                                            "status":  {
+                                                                           "name":  "status",
+                                                                           "type":  "enum(\u0027new\u0027,\u0027in_review\u0027,\u0027qualified\u0027)",
+                                                                           "primaryKey":  false,
+                                                                           "notNull":  true,
+                                                                           "autoincrement":  false,
+                                                                           "default":  "\u0027new\u0027"
+                                                                       },
+                                                            "createdAt":  {
+                                                                              "name":  "createdAt",
+                                                                              "type":  "timestamp",
+                                                                              "primaryKey":  false,
+                                                                              "notNull":  true,
+                                                                              "autoincrement":  false,
+                                                                              "default":  "(now())"
+                                                                          }
+                                                        },
+                                            "indexes":  {
+                                                            "submission_project_created_idx":  {
+                                                                                                   "name":  "submission_project_created_idx",
+                                                                                                   "columns":  [
+                                                                                                                   "projectId",
+                                                                                                                   "createdAt"
+                                                                                                               ],
+                                                                                                   "isUnique":  false
+                                                                                               },
+                                                            "submission_page_created_idx":  {
+                                                                                                "name":  "submission_page_created_idx",
+                                                                                                "columns":  [
+                                                                                                                "pageId",
+                                                                                                                "createdAt"
+                                                                                                            ],
+                                                                                                "isUnique":  false
+                                                                                            }
+                                                        },
+                                            "foreignKeys":  {
+                                                                "form_submissions_projectId_projects_id_fk":  {
+                                                                                                                  "name":  "form_submissions_projectId_projects_id_fk",
+                                                                                                                  "tableFrom":  "form_submissions",
+                                                                                                                  "tableTo":  "projects",
+                                                                                                                  "columnsFrom":  [
+                                                                                                                                      "projectId"
+                                                                                                                                  ],
+                                                                                                                  "columnsTo":  [
+                                                                                                                                    "id"
+                                                                                                                                ],
+                                                                                                                  "onDelete":  "cascade",
+                                                                                                                  "onUpdate":  "no action"
+                                                                                                              },
+                                                                "form_submissions_pageId_pages_id_fk":  {
+                                                                                                            "name":  "form_submissions_pageId_pages_id_fk",
+                                                                                                            "tableFrom":  "form_submissions",
+                                                                                                            "tableTo":  "pages",
+                                                                                                            "columnsFrom":  [
+                                                                                                                                "pageId"
+                                                                                                                            ],
+                                                                                                            "columnsTo":  [
+                                                                                                                              "id"
+                                                                                                                          ],
+                                                                                                            "onDelete":  "cascade",
+                                                                                                            "onUpdate":  "no action"
+                                                                                                        }
+                                                            },
+                                            "compositePrimaryKeys":  {
+                                                                         "form_submissions_id":  {
+                                                                                                     "name":  "form_submissions_id",
+                                                                                                     "columns":  [
+                                                                                                                     "id"
+                                                                                                                 ]
+                                                                                                 }
+                                                                     },
+                                            "uniqueConstraints":  {
+
+                                                                  },
+                                            "checkConstraint":  {
+
+                                                                }
+                                        },
+                   "pages":  {
+                                 "name":  "pages",
+                                 "columns":  {
+                                                 "id":  {
+                                                            "name":  "id",
+                                                            "type":  "int",
+                                                            "primaryKey":  false,
+                                                            "notNull":  true,
+                                                            "autoincrement":  true
+                                                        },
+                                                 "projectId":  {
+                                                                   "name":  "projectId",
+                                                                   "type":  "int",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false
+                                                               },
+                                                 "name":  {
+                                                              "name":  "name",
+                                                              "type":  "varchar(160)",
+                                                              "primaryKey":  false,
+                                                              "notNull":  true,
+                                                              "autoincrement":  false
+                                                          },
+                                                 "path":  {
+                                                              "name":  "path",
+                                                              "type":  "varchar(240)",
+                                                              "primaryKey":  false,
+                                                              "notNull":  true,
+                                                              "autoincrement":  false
+                                                          },
+                                                 "sortOrder":  {
+                                                                   "name":  "sortOrder",
+                                                                   "type":  "int",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false,
+                                                                   "default":  0
+                                                               },
+                                                 "seoTitle":  {
+                                                                  "name":  "seoTitle",
+                                                                  "type":  "varchar(180)",
+                                                                  "primaryKey":  false,
+                                                                  "notNull":  false,
+                                                                  "autoincrement":  false
+                                                              },
+                                                 "seoDescription":  {
+                                                                        "name":  "seoDescription",
+                                                                        "type":  "varchar(320)",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  false,
+                                                                        "autoincrement":  false
+                                                                    },
+                                                 "faviconUrl":  {
+                                                                    "name":  "faviconUrl",
+                                                                    "type":  "varchar(1024)",
+                                                                    "primaryKey":  false,
+                                                                    "notNull":  false,
+                                                                    "autoincrement":  false
+                                                                },
+                                                 "openGraphImageUrl":  {
+                                                                           "name":  "openGraphImageUrl",
+                                                                           "type":  "varchar(1024)",
+                                                                           "primaryKey":  false,
+                                                                           "notNull":  false,
+                                                                           "autoincrement":  false
+                                                                       },
+                                                 "createdAt":  {
+                                                                   "name":  "createdAt",
+                                                                   "type":  "timestamp",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false,
+                                                                   "default":  "(now())"
+                                                               },
+                                                 "updatedAt":  {
+                                                                   "name":  "updatedAt",
+                                                                   "type":  "timestamp",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false,
+                                                                   "onUpdate":  true,
+                                                                   "default":  "(now())"
+                                                               }
+                                             },
+                                 "indexes":  {
+                                                 "page_project_path_unique":  {
+                                                                                  "name":  "page_project_path_unique",
+                                                                                  "columns":  [
+                                                                                                  "projectId",
+                                                                                                  "path"
+                                                                                              ],
+                                                                                  "isUnique":  true
+                                                                              },
+                                                 "page_project_order_idx":  {
+                                                                                "name":  "page_project_order_idx",
+                                                                                "columns":  [
+                                                                                                "projectId",
+                                                                                                "sortOrder"
+                                                                                            ],
+                                                                                "isUnique":  false
+                                                                            }
+                                             },
+                                 "foreignKeys":  {
+                                                     "pages_projectId_projects_id_fk":  {
+                                                                                            "name":  "pages_projectId_projects_id_fk",
+                                                                                            "tableFrom":  "pages",
+                                                                                            "tableTo":  "projects",
+                                                                                            "columnsFrom":  [
+                                                                                                                "projectId"
+                                                                                                            ],
+                                                                                            "columnsTo":  [
+                                                                                                              "id"
+                                                                                                          ],
+                                                                                            "onDelete":  "cascade",
+                                                                                            "onUpdate":  "no action"
+                                                                                        }
+                                                 },
+                                 "compositePrimaryKeys":  {
+                                                              "pages_id":  {
+                                                                               "name":  "pages_id",
+                                                                               "columns":  [
+                                                                                               "id"
+                                                                                           ]
+                                                                           }
+                                                          },
+                                 "uniqueConstraints":  {
+
+                                                       },
+                                 "checkConstraint":  {
+
+                                                     }
+                             },
+                   "project_tags":  {
+                                        "name":  "project_tags",
+                                        "columns":  {
+                                                        "projectId":  {
+                                                                          "name":  "projectId",
+                                                                          "type":  "int",
+                                                                          "primaryKey":  false,
+                                                                          "notNull":  true,
+                                                                          "autoincrement":  false
+                                                                      },
+                                                        "tagId":  {
+                                                                      "name":  "tagId",
+                                                                      "type":  "int",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false
+                                                                  },
+                                                        "createdAt":  {
+                                                                          "name":  "createdAt",
+                                                                          "type":  "timestamp",
+                                                                          "primaryKey":  false,
+                                                                          "notNull":  true,
+                                                                          "autoincrement":  false,
+                                                                          "default":  "(now())"
+                                                                      }
+                                                    },
+                                        "indexes":  {
+                                                        "project_tag_unique":  {
+                                                                                   "name":  "project_tag_unique",
+                                                                                   "columns":  [
+                                                                                                   "projectId",
+                                                                                                   "tagId"
+                                                                                               ],
+                                                                                   "isUnique":  true
+                                                                               },
+                                                        "project_tag_tag_idx":  {
+                                                                                    "name":  "project_tag_tag_idx",
+                                                                                    "columns":  [
+                                                                                                    "tagId"
+                                                                                                ],
+                                                                                    "isUnique":  false
+                                                                                }
+                                                    },
+                                        "foreignKeys":  {
+                                                            "project_tags_projectId_projects_id_fk":  {
+                                                                                                          "name":  "project_tags_projectId_projects_id_fk",
+                                                                                                          "tableFrom":  "project_tags",
+                                                                                                          "tableTo":  "projects",
+                                                                                                          "columnsFrom":  [
+                                                                                                                              "projectId"
+                                                                                                                          ],
+                                                                                                          "columnsTo":  [
+                                                                                                                            "id"
+                                                                                                                        ],
+                                                                                                          "onDelete":  "cascade",
+                                                                                                          "onUpdate":  "no action"
+                                                                                                      },
+                                                            "project_tags_tagId_tags_id_fk":  {
+                                                                                                  "name":  "project_tags_tagId_tags_id_fk",
+                                                                                                  "tableFrom":  "project_tags",
+                                                                                                  "tableTo":  "tags",
+                                                                                                  "columnsFrom":  [
+                                                                                                                      "tagId"
+                                                                                                                  ],
+                                                                                                  "columnsTo":  [
+                                                                                                                    "id"
+                                                                                                                ],
+                                                                                                  "onDelete":  "cascade",
+                                                                                                  "onUpdate":  "no action"
+                                                                                              }
+                                                        },
+                                        "compositePrimaryKeys":  {
+
+                                                                 },
+                                        "uniqueConstraints":  {
+
+                                                              },
+                                        "checkConstraint":  {
+
+                                                            }
+                                    },
+                   "projects":  {
+                                    "name":  "projects",
+                                    "columns":  {
+                                                    "id":  {
+                                                               "name":  "id",
+                                                               "type":  "int",
+                                                               "primaryKey":  false,
+                                                               "notNull":  true,
+                                                               "autoincrement":  true
+                                                           },
+                                                    "workspaceId":  {
+                                                                        "name":  "workspaceId",
+                                                                        "type":  "int",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  false
+                                                                    },
+                                                    "name":  {
+                                                                 "name":  "name",
+                                                                 "type":  "varchar(180)",
+                                                                 "primaryKey":  false,
+                                                                 "notNull":  true,
+                                                                 "autoincrement":  false
+                                                             },
+                                                    "slug":  {
+                                                                 "name":  "slug",
+                                                                 "type":  "varchar(200)",
+                                                                 "primaryKey":  false,
+                                                                 "notNull":  true,
+                                                                 "autoincrement":  false
+                                                             },
+                                                    "status":  {
+                                                                   "name":  "status",
+                                                                   "type":  "enum(\u0027draft\u0027,\u0027published\u0027,\u0027archived\u0027)",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false,
+                                                                   "default":  "\u0027draft\u0027"
+                                                               },
+                                                    "createdBy":  {
+                                                                      "name":  "createdBy",
+                                                                      "type":  "int",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false
+                                                                  },
+                                                    "createdAt":  {
+                                                                      "name":  "createdAt",
+                                                                      "type":  "timestamp",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false,
+                                                                      "default":  "(now())"
+                                                                  },
+                                                    "updatedAt":  {
+                                                                      "name":  "updatedAt",
+                                                                      "type":  "timestamp",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false,
+                                                                      "onUpdate":  true,
+                                                                      "default":  "(now())"
+                                                                  }
+                                                },
+                                    "indexes":  {
+                                                    "project_workspace_slug_unique":  {
+                                                                                          "name":  "project_workspace_slug_unique",
+                                                                                          "columns":  [
+                                                                                                          "workspaceId",
+                                                                                                          "slug"
+                                                                                                      ],
+                                                                                          "isUnique":  true
+                                                                                      },
+                                                    "project_workspace_updated_idx":  {
+                                                                                          "name":  "project_workspace_updated_idx",
+                                                                                          "columns":  [
+                                                                                                          "workspaceId",
+                                                                                                          "updatedAt"
+                                                                                                      ],
+                                                                                          "isUnique":  false
+                                                                                      }
+                                                },
+                                    "foreignKeys":  {
+                                                        "projects_workspaceId_workspaces_id_fk":  {
+                                                                                                      "name":  "projects_workspaceId_workspaces_id_fk",
+                                                                                                      "tableFrom":  "projects",
+                                                                                                      "tableTo":  "workspaces",
+                                                                                                      "columnsFrom":  [
+                                                                                                                          "workspaceId"
+                                                                                                                      ],
+                                                                                                      "columnsTo":  [
+                                                                                                                        "id"
+                                                                                                                    ],
+                                                                                                      "onDelete":  "cascade",
+                                                                                                      "onUpdate":  "no action"
+                                                                                                  },
+                                                        "projects_createdBy_users_id_fk":  {
+                                                                                               "name":  "projects_createdBy_users_id_fk",
+                                                                                               "tableFrom":  "projects",
+                                                                                               "tableTo":  "users",
+                                                                                               "columnsFrom":  [
+                                                                                                                   "createdBy"
+                                                                                                               ],
+                                                                                               "columnsTo":  [
+                                                                                                                 "id"
+                                                                                                             ],
+                                                                                               "onDelete":  "cascade",
+                                                                                               "onUpdate":  "no action"
+                                                                                           }
+                                                    },
+                                    "compositePrimaryKeys":  {
+                                                                 "projects_id":  {
+                                                                                     "name":  "projects_id",
+                                                                                     "columns":  [
+                                                                                                     "id"
+                                                                                                 ]
+                                                                                 }
+                                                             },
+                                    "uniqueConstraints":  {
+
+                                                          },
+                                    "checkConstraint":  {
+
+                                                        }
+                                },
+                   "tags":  {
+                                "name":  "tags",
+                                "columns":  {
+                                                "id":  {
+                                                           "name":  "id",
+                                                           "type":  "int",
+                                                           "primaryKey":  false,
+                                                           "notNull":  true,
+                                                           "autoincrement":  true
+                                                       },
+                                                "workspaceId":  {
+                                                                    "name":  "workspaceId",
+                                                                    "type":  "int",
+                                                                    "primaryKey":  false,
+                                                                    "notNull":  true,
+                                                                    "autoincrement":  false
+                                                                },
+                                                "name":  {
+                                                             "name":  "name",
+                                                             "type":  "varchar(80)",
+                                                             "primaryKey":  false,
+                                                             "notNull":  true,
+                                                             "autoincrement":  false
+                                                         },
+                                                "color":  {
+                                                              "name":  "color",
+                                                              "type":  "varchar(20)",
+                                                              "primaryKey":  false,
+                                                              "notNull":  true,
+                                                              "autoincrement":  false,
+                                                              "default":  "\u0027#2563eb\u0027"
+                                                          },
+                                                "createdBy":  {
+                                                                  "name":  "createdBy",
+                                                                  "type":  "int",
+                                                                  "primaryKey":  false,
+                                                                  "notNull":  true,
+                                                                  "autoincrement":  false
+                                                              },
+                                                "createdAt":  {
+                                                                  "name":  "createdAt",
+                                                                  "type":  "timestamp",
+                                                                  "primaryKey":  false,
+                                                                  "notNull":  true,
+                                                                  "autoincrement":  false,
+                                                                  "default":  "(now())"
+                                                              }
+                                            },
+                                "indexes":  {
+                                                "tag_workspace_name_unique":  {
+                                                                                  "name":  "tag_workspace_name_unique",
+                                                                                  "columns":  [
+                                                                                                  "workspaceId",
+                                                                                                  "name"
+                                                                                              ],
+                                                                                  "isUnique":  true
+                                                                              }
+                                            },
+                                "foreignKeys":  {
+                                                    "tags_workspaceId_workspaces_id_fk":  {
+                                                                                              "name":  "tags_workspaceId_workspaces_id_fk",
+                                                                                              "tableFrom":  "tags",
+                                                                                              "tableTo":  "workspaces",
+                                                                                              "columnsFrom":  [
+                                                                                                                  "workspaceId"
+                                                                                                              ],
+                                                                                              "columnsTo":  [
+                                                                                                                "id"
+                                                                                                            ],
+                                                                                              "onDelete":  "cascade",
+                                                                                              "onUpdate":  "no action"
+                                                                                          },
+                                                    "tags_createdBy_users_id_fk":  {
+                                                                                       "name":  "tags_createdBy_users_id_fk",
+                                                                                       "tableFrom":  "tags",
+                                                                                       "tableTo":  "users",
+                                                                                       "columnsFrom":  [
+                                                                                                           "createdBy"
+                                                                                                       ],
+                                                                                       "columnsTo":  [
+                                                                                                         "id"
+                                                                                                     ],
+                                                                                       "onDelete":  "cascade",
+                                                                                       "onUpdate":  "no action"
+                                                                                   }
+                                                },
+                                "compositePrimaryKeys":  {
+                                                             "tags_id":  {
+                                                                             "name":  "tags_id",
+                                                                             "columns":  [
+                                                                                             "id"
+                                                                                         ]
+                                                                         }
+                                                         },
+                                "uniqueConstraints":  {
+
+                                                      },
+                                "checkConstraint":  {
+
+                                                    }
+                            },
+                   "users":  {
+                                 "name":  "users",
+                                 "columns":  {
+                                                 "id":  {
+                                                            "name":  "id",
+                                                            "type":  "int",
+                                                            "primaryKey":  false,
+                                                            "notNull":  true,
+                                                            "autoincrement":  true
+                                                        },
+                                                 "openId":  {
+                                                                "name":  "openId",
+                                                                "type":  "varchar(64)",
+                                                                "primaryKey":  false,
+                                                                "notNull":  true,
+                                                                "autoincrement":  false
+                                                            },
+                                                 "name":  {
+                                                              "name":  "name",
+                                                              "type":  "text",
+                                                              "primaryKey":  false,
+                                                              "notNull":  false,
+                                                              "autoincrement":  false
+                                                          },
+                                                 "email":  {
+                                                               "name":  "email",
+                                                               "type":  "varchar(320)",
+                                                               "primaryKey":  false,
+                                                               "notNull":  false,
+                                                               "autoincrement":  false
+                                                           },
+                                                 "loginMethod":  {
+                                                                     "name":  "loginMethod",
+                                                                     "type":  "varchar(64)",
+                                                                     "primaryKey":  false,
+                                                                     "notNull":  false,
+                                                                     "autoincrement":  false
+                                                                 },
+                                                 "role":  {
+                                                              "name":  "role",
+                                                              "type":  "enum(\u0027user\u0027,\u0027admin\u0027)",
+                                                              "primaryKey":  false,
+                                                              "notNull":  true,
+                                                              "autoincrement":  false,
+                                                              "default":  "\u0027user\u0027"
+                                                          },
+                                                 "createdAt":  {
+                                                                   "name":  "createdAt",
+                                                                   "type":  "timestamp",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false,
+                                                                   "default":  "(now())"
+                                                               },
+                                                 "updatedAt":  {
+                                                                   "name":  "updatedAt",
+                                                                   "type":  "timestamp",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false,
+                                                                   "onUpdate":  true,
+                                                                   "default":  "(now())"
+                                                               },
+                                                 "lastSignedIn":  {
+                                                                      "name":  "lastSignedIn",
+                                                                      "type":  "timestamp",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false,
+                                                                      "default":  "(now())"
+                                                                  }
+                                             },
+                                 "indexes":  {
+
+                                             },
+                                 "foreignKeys":  {
+
+                                                 },
+                                 "compositePrimaryKeys":  {
+                                                              "users_id":  {
+                                                                               "name":  "users_id",
+                                                                               "columns":  [
+                                                                                               "id"
+                                                                                           ]
+                                                                           }
+                                                          },
+                                 "uniqueConstraints":  {
+                                                           "users_openId_unique":  {
+                                                                                       "name":  "users_openId_unique",
+                                                                                       "columns":  [
+                                                                                                       "openId"
+                                                                                                   ]
+                                                                                   }
+                                                       },
+                                 "checkConstraint":  {
+
+                                                     }
+                             },
+                   "workspace_members":  {
+                                             "name":  "workspace_members",
+                                             "columns":  {
+                                                             "id":  {
+                                                                        "name":  "id",
+                                                                        "type":  "int",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  true
+                                                                    },
+                                                             "workspaceId":  {
+                                                                                 "name":  "workspaceId",
+                                                                                 "type":  "int",
+                                                                                 "primaryKey":  false,
+                                                                                 "notNull":  true,
+                                                                                 "autoincrement":  false
+                                                                             },
+                                                             "userId":  {
+                                                                            "name":  "userId",
+                                                                            "type":  "int",
+                                                                            "primaryKey":  false,
+                                                                            "notNull":  true,
+                                                                            "autoincrement":  false
+                                                                        },
+                                                             "permission":  {
+                                                                                "name":  "permission",
+                                                                                "type":  "enum(\u0027owner\u0027,\u0027editor\u0027,\u0027viewer\u0027)",
+                                                                                "primaryKey":  false,
+                                                                                "notNull":  true,
+                                                                                "autoincrement":  false,
+                                                                                "default":  "\u0027editor\u0027"
+                                                                            },
+                                                             "createdAt":  {
+                                                                               "name":  "createdAt",
+                                                                               "type":  "timestamp",
+                                                                               "primaryKey":  false,
+                                                                               "notNull":  true,
+                                                                               "autoincrement":  false,
+                                                                               "default":  "(now())"
+                                                                           }
+                                                         },
+                                             "indexes":  {
+                                                             "workspace_member_unique":  {
+                                                                                             "name":  "workspace_member_unique",
+                                                                                             "columns":  [
+                                                                                                             "workspaceId",
+                                                                                                             "userId"
+                                                                                                         ],
+                                                                                             "isUnique":  true
+                                                                                         },
+                                                             "workspace_member_user_idx":  {
+                                                                                               "name":  "workspace_member_user_idx",
+                                                                                               "columns":  [
+                                                                                                               "userId"
+                                                                                                           ],
+                                                                                               "isUnique":  false
+                                                                                           }
+                                                         },
+                                             "foreignKeys":  {
+                                                                 "workspace_members_workspaceId_workspaces_id_fk":  {
+                                                                                                                        "name":  "workspace_members_workspaceId_workspaces_id_fk",
+                                                                                                                        "tableFrom":  "workspace_members",
+                                                                                                                        "tableTo":  "workspaces",
+                                                                                                                        "columnsFrom":  [
+                                                                                                                                            "workspaceId"
+                                                                                                                                        ],
+                                                                                                                        "columnsTo":  [
+                                                                                                                                          "id"
+                                                                                                                                      ],
+                                                                                                                        "onDelete":  "cascade",
+                                                                                                                        "onUpdate":  "no action"
+                                                                                                                    },
+                                                                 "workspace_members_userId_users_id_fk":  {
+                                                                                                              "name":  "workspace_members_userId_users_id_fk",
+                                                                                                              "tableFrom":  "workspace_members",
+                                                                                                              "tableTo":  "users",
+                                                                                                              "columnsFrom":  [
+                                                                                                                                  "userId"
+                                                                                                                              ],
+                                                                                                              "columnsTo":  [
+                                                                                                                                "id"
+                                                                                                                            ],
+                                                                                                              "onDelete":  "cascade",
+                                                                                                              "onUpdate":  "no action"
+                                                                                                          }
+                                                             },
+                                             "compositePrimaryKeys":  {
+                                                                          "workspace_members_id":  {
+                                                                                                       "name":  "workspace_members_id",
+                                                                                                       "columns":  [
+                                                                                                                       "id"
+                                                                                                                   ]
+                                                                                                   }
+                                                                      },
+                                             "uniqueConstraints":  {
+
+                                                                   },
+                                             "checkConstraint":  {
+
+                                                                 }
+                                         },
+                   "workspaces":  {
+                                      "name":  "workspaces",
+                                      "columns":  {
+                                                      "id":  {
+                                                                 "name":  "id",
+                                                                 "type":  "int",
+                                                                 "primaryKey":  false,
+                                                                 "notNull":  true,
+                                                                 "autoincrement":  true
+                                                             },
+                                                      "name":  {
+                                                                   "name":  "name",
+                                                                   "type":  "varchar(160)",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false
+                                                               },
+                                                      "slug":  {
+                                                                   "name":  "slug",
+                                                                   "type":  "varchar(180)",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false
+                                                               },
+                                                      "createdBy":  {
+                                                                        "name":  "createdBy",
+                                                                        "type":  "int",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  false
+                                                                    },
+                                                      "createdAt":  {
+                                                                        "name":  "createdAt",
+                                                                        "type":  "timestamp",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  false,
+                                                                        "default":  "(now())"
+                                                                    },
+                                                      "updatedAt":  {
+                                                                        "name":  "updatedAt",
+                                                                        "type":  "timestamp",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  false,
+                                                                        "onUpdate":  true,
+                                                                        "default":  "(now())"
+                                                                    }
+                                                  },
+                                      "indexes":  {
+
+                                                  },
+                                      "foreignKeys":  {
+                                                          "workspaces_createdBy_users_id_fk":  {
+                                                                                                   "name":  "workspaces_createdBy_users_id_fk",
+                                                                                                   "tableFrom":  "workspaces",
+                                                                                                   "tableTo":  "users",
+                                                                                                   "columnsFrom":  [
+                                                                                                                       "createdBy"
+                                                                                                                   ],
+                                                                                                   "columnsTo":  [
+                                                                                                                     "id"
+                                                                                                                 ],
+                                                                                                   "onDelete":  "cascade",
+                                                                                                   "onUpdate":  "no action"
+                                                                                               }
+                                                      },
+                                      "compositePrimaryKeys":  {
+                                                                   "workspaces_id":  {
+                                                                                         "name":  "workspaces_id",
+                                                                                         "columns":  [
+                                                                                                         "id"
+                                                                                                     ]
+                                                                                     }
+                                                               },
+                                      "uniqueConstraints":  {
+                                                                "workspaces_slug_unique":  {
+                                                                                               "name":  "workspaces_slug_unique",
+                                                                                               "columns":  [
+                                                                                                               "slug"
+                                                                                                           ]
+                                                                                           }
+                                                            },
+                                      "checkConstraint":  {
+
+                                                          }
+                                  },
+                   "error_logs":  {
+                                      "name":  "error_logs",
+                                      "columns":  {
+                                                      "id":  {
+                                                                 "name":  "id",
+                                                                 "type":  "int",
+                                                                 "primaryKey":  false,
+                                                                 "notNull":  true,
+                                                                 "autoincrement":  true
+                                                             },
+                                                      "userId":  {
+                                                                     "name":  "userId",
+                                                                     "type":  "int",
+                                                                     "primaryKey":  false,
+                                                                     "notNull":  true,
+                                                                     "autoincrement":  false
+                                                                 },
+                                                      "requestId":  {
+                                                                        "name":  "requestId",
+                                                                        "type":  "varchar(64)",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  false
+                                                                    },
+                                                      "action":  {
+                                                                     "name":  "action",
+                                                                     "type":  "varchar(80)",
+                                                                     "primaryKey":  false,
+                                                                     "notNull":  true,
+                                                                     "autoincrement":  false
+                                                                 },
+                                                      "route":  {
+                                                                    "name":  "route",
+                                                                    "type":  "varchar(255)",
+                                                                    "primaryKey":  false,
+                                                                    "notNull":  true,
+                                                                    "autoincrement":  false
+                                                                },
+                                                      "code":  {
+                                                                   "name":  "code",
+                                                                   "type":  "varchar(80)",
+                                                                   "primaryKey":  false,
+                                                                   "notNull":  true,
+                                                                   "autoincrement":  false
+                                                               },
+                                                      "message":  {
+                                                                      "name":  "message",
+                                                                      "type":  "varchar(500)",
+                                                                      "primaryKey":  false,
+                                                                      "notNull":  true,
+                                                                      "autoincrement":  false
+                                                                  },
+                                                      "createdAt":  {
+                                                                        "name":  "createdAt",
+                                                                        "type":  "timestamp",
+                                                                        "primaryKey":  false,
+                                                                        "notNull":  true,
+                                                                        "autoincrement":  false,
+                                                                        "default":  "(now())"
+                                                                    }
+                                                  },
+                                      "indexes":  {
+                                                      "error_log_user_created_idx":  {
+                                                                                         "name":  "error_log_user_created_idx",
+                                                                                         "columns":  [
+                                                                                                         "userId",
+                                                                                                         "createdAt"
+                                                                                                     ],
+                                                                                         "isUnique":  false
+                                                                                     }
+                                                  },
+                                      "foreignKeys":  {
+                                                          "error_logs_userId_users_id_fk":  {
+                                                                                                "name":  "error_logs_userId_users_id_fk",
+                                                                                                "tableFrom":  "error_logs",
+                                                                                                "tableTo":  "users",
+                                                                                                "columnsFrom":  [
+                                                                                                                    "userId"
+                                                                                                                ],
+                                                                                                "columnsTo":  [
+                                                                                                                  "id"
+                                                                                                              ],
+                                                                                                "onDelete":  "cascade",
+                                                                                                "onUpdate":  "no action"
+                                                                                            }
+                                                      },
+                                      "compositePrimaryKeys":  {
+                                                                   "error_logs_id":  {
+                                                                                         "name":  "error_logs_id",
+                                                                                         "columns":  [
+                                                                                                         "id"
+                                                                                                     ]
+                                                                                     }
+                                                               },
+                                      "uniqueConstraints":  {
+                                                                "error_logs_requestId_unique":  {
+                                                                                                    "name":  "error_logs_requestId_unique",
+                                                                                                    "columns":  [
+                                                                                                                    "requestId"
+                                                                                                                ]
+                                                                                                }
+                                                            },
+                                      "checkConstraint":  {
+
+                                                          }
+                                  }
+               },
+    "views":  {
+
+              },
+    "_meta":  {
+                  "schemas":  {
+
+                              },
+                  "tables":  {
+
+                             },
+                  "columns":  {
+
+                              }
+              },
+    "internal":  {
+                     "tables":  {
+
+                                },
+                     "indexes":  {
+
+                                 }
+                 }
+}

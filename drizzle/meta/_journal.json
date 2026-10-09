@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1786718272553,
+      "tag": "0000_unknown_machine_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1786719306137,
+      "tag": "0001_curious_cerebro",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1786987162445,
+      "tag": "0002_illegal_surge",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1791570000000,
+      "tag": "0003_error_logs",
+      "breakpoints": true
+    }
+  ]
+}
