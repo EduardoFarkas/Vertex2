@@ -11,6 +11,8 @@ export const users = mysqlTable("users", {
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
+  // Local email/password auth (scrypt). Null for OAuth-only identities.
+  passwordHash: varchar("passwordHash", { length: 255 }),
 });
 
 export const errorLogs = mysqlTable("error_logs", {

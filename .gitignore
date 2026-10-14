@@ -7,6 +7,9 @@ dist/
 build/
 *.dist
 
+# Local object storage (uploads) written by server/_core/localStorage.ts
+.vertex-storage/
+
 # Environment variables
 .env
 .env.local

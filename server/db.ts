@@ -21,7 +21,9 @@ import { createProjectTemplateDocument, type ProjectTemplateId } from "./project
 import { sanitizePublishedCss, sanitizePublishedHtml } from "./publishedSanitization";
 import { validateUploadedFile } from "./uploadValidation";
 import { ENV } from "./_core/env";
+import { hashPassword } from "./_core/password";
 import { storagePut } from "./storage";
+import type { User } from "../drizzle/schema";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -70,6 +72,46 @@ export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) return undefined;
   return (await db.select().from(users).where(eq(users.openId, openId)).limit(1))[0];
+}
+
+/** Look up a local email/password user by email (case-insensitive). */
+export async function getUserByEmail(email: string): Promise<User | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const normalized = email.trim().toLowerCase();
+  const rows = await db.select().from(users).where(eq(users.email, normalized)).limit(1);
+  return rows[0];
+}
+
+/**
+ * Register a local user with an email + scrypt password hash.
+ * Returns null if the email is already taken. The `openId` is derived from the
+ * email so the existing OAuth session/verify flow keeps working unchanged.
+ */
+export async function createLocalUser(
+  name: string,
+  email: string,
+  password: string,
+): Promise<User | null> {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  const normalized = email.trim().toLowerCase();
+  if (await getUserByEmail(normalized)) return null;
+
+  const openId = `local:${normalized}`;
+  const isOwner = normalized === ENV.ownerOpenId;
+  const [result] = await db
+    .insert(users)
+    .values({
+      openId,
+      name: name.trim() || normalized,
+      email: normalized,
+      loginMethod: "password",
+      role: isOwner ? "admin" : "user",
+      passwordHash: await hashPassword(password),
+    });
+  const id = insertId(result);
+  return (await db.select().from(users).where(eq(users.id, id)).limit(1))[0];
 }
 
 export async function ensurePersonalWorkspace(userId: number, userName?: string | null) {

@@ -42,7 +42,10 @@ export function getSessionCookieOptions(
   return {
     httpOnly: true,
     path: "/",
-    sameSite: "none",
+    // "none" requires Secure, which browsers reject on plain HTTP (e.g. local
+    // dev). Use "lax" when the connection isn't secure so local login works,
+    // and "none" over HTTPS (Railway) for cross-site compatibility.
+    sameSite: isSecureRequest(req) ? "none" : "lax",
     secure: isSecureRequest(req),
   };
 }
